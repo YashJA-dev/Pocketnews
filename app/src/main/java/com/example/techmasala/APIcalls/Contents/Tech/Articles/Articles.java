@@ -3,6 +3,8 @@ package com.example.techmasala.APIcalls.Contents.Tech.Articles;
 import com.google.gson.annotations.SerializedName;
 
 public class Articles {
+    @SerializedName("source")
+    private Source source;
     @SerializedName("urlToImage")
     private String imgUrl;
     @SerializedName("title")
@@ -17,14 +19,23 @@ public class Articles {
     private String publishDate;
 
     //    private String author;
-    public Articles(String imgUrl, String title, String description, String url, String content, String publishDate) {
+    public Articles(Source source,String imgUrl, String title, String description, String url, String content, String publishDate) {
 //        this.author=author;
+        this.source=source;
         this.title = title;
         this.content = content;
         this.imgUrl = imgUrl;
         this.publishDate = publishDate;
         this.description = description;
         this.url = url;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 
     public Articles() {
@@ -87,3 +98,4 @@ public class Articles {
 //        this.author = author;
 //    }
 }
+

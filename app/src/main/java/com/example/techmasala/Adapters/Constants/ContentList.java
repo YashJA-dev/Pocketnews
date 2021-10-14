@@ -14,6 +14,12 @@ public class ContentList {
         this.title = title;
         this.author = author;
     }
+    public ContentList(String imgUrl, String description, String title, String author) {
+        this.imgUrl = imgUrl;
+        this.description = description;
+        this.title = title;
+        this.author = author;
+    }
 
     public String getImgUrl() {
         return imgUrl;

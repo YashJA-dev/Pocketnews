@@ -6,10 +6,16 @@ import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.techmasala.APIcalls.Contents.Tech.Articles.Articles;
 import com.example.techmasala.APIcalls.Contents.Tech.Tech;
+import com.example.techmasala.Adapters.Constants.ContentList;
+import com.example.techmasala.Adapters.CustomLinearLayoutManager;
+import com.example.techmasala.Adapters.RecyclerView_Adapter;
 import com.example.techmasala.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,13 +31,13 @@ public class TechApi {
         this.context=context;
         this.activity=activity;
     }
-    public void getData(String url){
-//        main=activity.findViewById(R.id.main_text);
+    public void getData(String url,String secondary, RecyclerView recyclerView){
+        List<ContentList> contents=new ArrayList<>();
         Retrofit retrofit=new Retrofit.Builder().baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PlaceHolderForApi placeHolderForApi=retrofit.create(PlaceHolderForApi.class);
-        Call<Tech> call=placeHolderForApi.getTechNews();
+        Call<Tech> call=placeHolderForApi.getTechNews(secondary);
         call.enqueue(new Callback<Tech>() {
             @Override
             public void onResponse(Call<Tech> call, Response<Tech> response) {
@@ -40,22 +46,35 @@ public class TechApi {
                 } else {
                     Tech tech = response.body();
                     List<Articles> articlesList=tech.getArticles();
-                    StringBuilder sb=new StringBuilder();
-                    for (Articles articles:articlesList){
 
-                        sb.append(articles.getDescription()+"\n");
-                        sb.append("\n");
-                        sb.append("\n");
+                    for(Articles articles:articlesList){
+
+                        if(articles.getSource().getName().equals("YouTube")||
+                        articles.getContent()==null||
+                        articles.getContent().equals("")||
+                                articles.getContent().contains("https")||
+                        articles.getContent().contains("<"))continue;
+                        ContentList contentList=new ContentList(
+
+                                articles.getImgUrl(),
+                                articles.getContent(),
+                                articles.getTitle(),
+                                articles.getSource().getName()
+                        );
+                        contents.add(contentList);
                     }
-                    main.setText(sb.toString());
-                    main.setMovementMethod(new ScrollingMovementMethod());
-                    Toast.makeText(context, "succ", Toast.LENGTH_LONG).show();
+                    if (contents.size()==0)getData(url,secondary,recyclerView);
+
+                    RecyclerView_Adapter adapter=new RecyclerView_Adapter(contents,context);
+                    recyclerView.setLayoutManager(new CustomLinearLayoutManager(context));
+                    recyclerView.setAdapter(adapter);
+//                    Toast.makeText(context, "succ", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Tech> call, Throwable t) {
-                main.setText(t.getMessage());
+               Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
 
             }
         });

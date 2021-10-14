@@ -2,19 +2,48 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+
     <group
         android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/top_10_news"
+            android:icon="@drawable/news_top_10"
+            android:title="Headlines"
+            />
+        <item
+            android:id="@+id/market_news"
+            android:icon="@drawable/market_img"
+            android:title="Market"
+            />
         <item
             android:id="@+id/techNav"
             android:icon="@drawable/tech_5g_"
-            android:title="Tech" />
+            android:title="Tech Dose" />
+        <item
+            android:id="@+id/bitcoin"
+            android:icon="@drawable/bitcoin"
+            android:title="Bit Coin" />
         <item
             android:id="@+id/sportNav"
             android:icon="@drawable/sport_img"
             android:title="Sport"
             />
-
-
+        <item
+            android:id="@+id/bollywood_news"
+            android:icon="@drawable/bollywood_img"
+            android:title="Filmy Duniya"
+            />
+        <item
+            android:id="@+id/health_news"
+            android:icon="@drawable/hospital_img"
+            android:title="Health"
+            />
+        <item
+            android:id="@+id/science"
+            android:icon="@drawable/science"
+            android:title="Science And Space"
+            />
 
     </group>
 </menu>

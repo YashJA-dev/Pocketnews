@@ -38,7 +38,8 @@ public class Main extends AppCompatActivity {
         ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerlayout,toolbar,
                 R.string.nav_open,R.string.nav_close);
         NavigationView navView=findViewById(R.id.navigation_View);
-        form_Transection("main loaded");
+        form_Transection("top-headlines?country=in&apiKey=e613af58839749aab8f66bba967ab5a8");
+        navView.setCheckedItem(R.id.top_10_news);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem clickedItem) {
@@ -46,11 +47,31 @@ public class Main extends AppCompatActivity {
                 if(prevClicked!=null&&selectedItem(prevClicked,clickedItem))return true;
                 switch (clickedItem.getItemId()){
                     case R.id.techNav:
-                        form_Transection("button Clicked");
+                        form_Transection("top-headlines?sources=techcrunch&apiKey=e613af58839749aab8f66bba967ab5a8");
                         break;
                     case R.id.sportNav:
-                        form_Transection("sportNav");
+                        form_Transection("top-headlines?country=in&category=sports&apiKey=e613af58839749aab8f66bba967ab5a8");
                         break;
+                    case R.id.top_10_news:
+                        form_Transection("top-headlines?country=in&apiKey=e613af58839749aab8f66bba967ab5a8");
+                        break;
+                    case R.id.market_news:
+                        form_Transection("top-headlines?country=in&category=business&apiKey=e613af58839749aab8f66bba967ab5a8");
+                        break;
+                    case R.id.bollywood_news:
+                        form_Transection("top-headlines?country=in&category=entertainment&apiKey=e613af58839749aab8f66bba967ab5a8");
+                        break;
+                    case R.id.science:
+                        form_Transection("top-headlines?country=in&category=science&apiKey=e613af58839749aab8f66bba967ab5a8");
+                        break;
+                    case R.id.bitcoin:
+                        form_Transection("everything?q=bitcoin&apiKey=e613af58839749aab8f66bba967ab5a8");
+                        break;
+                    case R.id.health_news:
+                        form_Transection("top-headlines?country=in&category=health&apiKey=e613af58839749aab8f66bba967ab5a8");
+                        break;
+
+
                 }
                 drawerlayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -62,7 +83,7 @@ public class Main extends AppCompatActivity {
     }
     private void form_Transection(String url){
         Bundle newsMain=new Bundle();
-        newsMain.putString("main",url);
+        newsMain.putString("urlSecond",url);
         News_main news_main=new News_main();
         news_main.setArguments(newsMain);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,news_main).commit();

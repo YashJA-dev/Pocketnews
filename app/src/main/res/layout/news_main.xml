@@ -6,79 +6,78 @@
     android:gravity="bottom"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:cardCornerRadius="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:elevation="10dp"
-        android:layout_weight="1.5">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/krishna_ji"
-            android:scaleType="fitXY"/>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
         android:elevation="50dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:cardCornerRadius="5dp"
-        android:layout_margin="5dp"
-        android:layout_weight="1">
-        <LinearLayout
+        android:layout_margin="5dp">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="bottom">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:text="News 18"/>
+            android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/img_card_news"
+                android:layout_width="match_parent"
+                android:layout_height="425dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:elevation="10dp"
+                android:layout_weight="1.5">
+                <ImageView
+                    android:id="@+id/img_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/krishna_ji"
+                    android:scaleType="fitXY"/>
+            </androidx.cardview.widget.CardView>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="8 People killed in Lakhinpur.."
-                android:textColor="@color/black"
-                android:textSize="17dp"
-                android:textStyle="bold|italic"
-                android:drawableLeft="@drawable/margin" />
-            <TextView
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="#534F4F"
-                android:textSize="15dp"
-                android:text="so this is our app and bla balab....
-,...........................................................................................
-.
-................................................
-........................sdfasdfsadadadadadadadadad........................
-asfs.dfsaaaaaaaaaaaaa....sdf.sadffffff..sadf...................................sad
-fs
-adf.
-sad.f
-sa.d
-f.sad
-f.sa
-sf
-asdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-a
-sdf
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/img_card_news"
+                android:orientation="vertical"
+                android:gravity="bottom">
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="News 18"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tiitle_news"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/cantata_one"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#534F4F"
+                    android:textSize="18dp"
+                    android:layout_marginRight="5dp"
+                    android:text="8 People killed in Lakhinpur.."
+                    android:drawableLeft="@drawable/margin" />
 
+                <TextView
+                    android:id="@+id/description_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="5dp"
+                    android:text="ghjghkgjkgjhgjhgkhgkhg"
 
-ad.fsadfdsasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasa"/>
-        </LinearLayout>
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

@@ -1,8 +1,11 @@
 package com.example.techmasala.APIcalls.Contents.Tech;
 
 import com.example.techmasala.APIcalls.Contents.Tech.Articles.Articles;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import javax.xml.transform.Source;
 
 public class Tech{
     private String status;
