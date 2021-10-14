@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    xmlns:droid="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/side_nav_bar"
+    android:gravity="bottom"
+    android:padding="20dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/header_nav_img"
+        android:src="@drawable/screenshot"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="News Fata Fatt"
+        droid:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:paddingTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="17dp"/>
+
+</LinearLayout>
