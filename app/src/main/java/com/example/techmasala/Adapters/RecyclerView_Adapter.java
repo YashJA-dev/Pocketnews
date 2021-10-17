@@ -26,6 +26,7 @@ import java.util.List;
 public class RecyclerView_Adapter extends RecyclerView.Adapter<RecyclerView_Adapter.ViewHolder_Main> {
     private Context context;
     private List<ContentList> list;
+    private ObjectClickListener objectClickListener;
     public RecyclerView_Adapter(List<ContentList> list, Context context){
         this.context=context;
         this.list=list;
@@ -44,8 +45,9 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<RecyclerView_Adap
         ContentList content = list.get(position);
         holder.description.setText(content.getDescription());
         holder.tittle.setText(content.getTitle());
-        if(position==0) holder.url_img_holder.setImageDrawable(context.getDrawable(R.drawable.krishna_ji));
-        else Picasso.get().load(content.getImgUrl()).into(holder.url_img_holder);
+//        if(position==0) holder.url_img_holder.setImageDrawable(context.getDrawable(R.drawable.krishna_ji));
+//        else
+            Picasso.get().load(content.getImgUrl()).into(holder.url_img_holder);
         holder.tittle.setText(content.getTitle());
         holder.author.setText(content.getAuthor());
     }
@@ -54,7 +56,6 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<RecyclerView_Adap
     public int getItemCount() {
         return list.size();
     }
-
 
     class ViewHolder_Main extends RecyclerView.ViewHolder{
         TextView description;
@@ -67,6 +68,19 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<RecyclerView_Adap
             url_img_holder=itemView.findViewById(R.id.img_news);
             tittle=itemView.findViewById(R.id.tiitle_news);
             author=itemView.findViewById(R.id.author);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    objectClickListener.onClick(list.get(getAdapterPosition()));
+                }
+            });
         }
     }
+    public void lister(ObjectClickListener objectClickListener){
+        this.objectClickListener=objectClickListener;
+    }
+    public interface ObjectClickListener{
+        public void onClick(ContentList content);
+    }
 }
+

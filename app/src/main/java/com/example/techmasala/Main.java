@@ -39,6 +39,7 @@ public class Main extends AppCompatActivity {
                 R.string.nav_open,R.string.nav_close);
         NavigationView navView=findViewById(R.id.navigation_View);
         form_Transection("top-headlines?country=in&apiKey=e613af58839749aab8f66bba967ab5a8");
+//        form_Transection2("www.youtube.com");
         navView.setCheckedItem(R.id.top_10_news);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -97,5 +98,6 @@ public class Main extends AppCompatActivity {
             drawerlayout.closeDrawer(GravityCompat.START);
         }else super.onBackPressed();
     }
+
 
 }

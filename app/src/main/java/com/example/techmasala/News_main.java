@@ -50,8 +50,7 @@ public class News_main extends Fragment {
         String secondary=getArguments().getString("urlSecond");
         new TechApi(getContext(),getActivity()).getData("https://newsapi.org/v2/",secondary,recycler);
 
-        recycler.setAdapter(adapter);
-
         super.onResume();
     }
+
 }
