@@ -45,8 +45,8 @@ public class RecyclerView_Adapter extends RecyclerView.Adapter<RecyclerView_Adap
         ContentList content = list.get(position);
         holder.description.setText(content.getDescription());
         holder.tittle.setText(content.getTitle());
-//        if(position==0) holder.url_img_holder.setImageDrawable(context.getDrawable(R.drawable.krishna_ji));
-//        else
+        if(position==0) holder.url_img_holder.setImageDrawable(context.getDrawable(R.drawable.krishna_ji));
+        else
             Picasso.get().load(content.getImgUrl()).into(holder.url_img_holder);
         holder.tittle.setText(content.getTitle());
         holder.author.setText(content.getAuthor());

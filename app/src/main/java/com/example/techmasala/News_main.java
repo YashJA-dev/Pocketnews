@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.techmasala.APIcalls.TechApi;
 import com.example.techmasala.Adapters.Constants.ContentList;
 import com.example.techmasala.Adapters.RecyclerView_Adapter;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,6 +49,8 @@ public class News_main extends Fragment {
         List<ContentList> li=new ArrayList<>();
         adapter = new RecyclerView_Adapter(li,ctx);
         String secondary=getArguments().getString("urlSecond");
+        ShimmerFrameLayout shimme=act.findViewById(R.id.simmer_for_news);
+        shimme.startShimmer();
         new TechApi(getContext(),getActivity()).getData("https://newsapi.org/v2/",secondary,recycler);
 
         super.onResume();

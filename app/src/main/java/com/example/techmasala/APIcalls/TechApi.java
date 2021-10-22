@@ -3,12 +3,15 @@ package com.example.techmasala.APIcalls;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.techmasala.APIcalls.Contents.Tech.Articles.Articles;
@@ -18,6 +21,7 @@ import com.example.techmasala.Adapters.CustomLinearLayoutManager;
 import com.example.techmasala.Adapters.RecyclerView_Adapter;
 import com.example.techmasala.News_web_view;
 import com.example.techmasala.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,7 @@ public class TechApi {
     }
     public void getData(String url,String secondary, RecyclerView recyclerView){
         List<ContentList> contents=new ArrayList<>();
+        ShimmerFrameLayout shimme=activity.findViewById(R.id.simmer_for_news);
         Retrofit retrofit=new Retrofit.Builder().baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -48,6 +53,7 @@ public class TechApi {
                 if (!response.isSuccessful()) {
 
                 } else {
+
                     Tech tech = response.body();
                     List<Articles> articlesList=tech.getArticles();
 
@@ -68,7 +74,8 @@ public class TechApi {
                         contents.add(contentList);
                     }
                     if (contents.size()==0)getData(url,secondary,recyclerView);
-
+                    shimme.stopShimmer();
+                    shimme.setVisibility(View.GONE);
                     RecyclerView_Adapter adapter=new RecyclerView_Adapter(contents,context);
                     recyclerView.setLayoutManager(new CustomLinearLayoutManager(context));
                     recyclerView.setAdapter(adapter);
@@ -85,27 +92,37 @@ public class TechApi {
 
             @Override
             public void onFailure(Call<Tech> call, Throwable t) {
-               Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
+//               Toast.makeText(context,"Fail",Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                builder1.setMessage("Pls Check Your Internet connection and retry :)");
+                builder1.setCancelable(true);
 
+                builder1.setPositiveButton(
+                        "Retry",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                activity.finish();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
-    }
-
-    private String modifiedContent(StringBuilder contentMod) {
-        int i=0;
-        for (i = contentMod.length()-1; i >=0 ; i--) {
-            if(contentMod.charAt(i)=='[')break;
-            if((contentMod.length()-i)>9)return contentMod.toString();
-        }
-        return contentMod.substring(0,i);
     }
     private void openNewsDepth(String url){
         Bundle urlBundle=new Bundle();
         urlBundle.putString("url",url);
-
         News_web_view webView=new News_web_view();
         webView.setArguments(urlBundle);
-
         activity.getFragmentManager().beginTransaction().
                 replace(R.id.fragment_container,webView).
                 addToBackStack("frags").commit();
@@ -114,10 +131,11 @@ public class TechApi {
     private boolean notSupportedNews(Articles articles) {
         Log.d("cricbuzz",articles.getSource().getName());
         return articles.getSource().getName().equals("YouTube")||
+                articles.getSource().getName().equals("TechRadar")||
+                articles.getSource().getName().equals("Space.com")||
                 articles.getContent()==null||
                 articles.getContent().equals("")||
-                articles.getContent().contains("https")||
-                articles.getContent().contains("<")||
                 articles.getSource().getName().equals("Cricbuzz");
     }
+
 }
